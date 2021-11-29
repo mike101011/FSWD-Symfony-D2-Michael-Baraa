@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Location;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -12,9 +13,9 @@ class LocationController extends AbstractController
     #[Route('/Addlocation', name: 'Addlocation')]
     public function addAction()
 
-    {  
+    {
 
-       
+
 
         // you can fetch the EntityManager via $this->getDoctrine()
 
@@ -24,10 +25,10 @@ class LocationController extends AbstractController
 
         $Location = new Location(); // here we will create an object from our class Product.
 
-        $Location->setLName('location B'); // in our Location class we have a set function for each column in our db
+        $Location->setLName('New Location'); // in our Location class we have a set function for each column in our db
 
         $Location->setPrice(3000);
-        $Location->setDescription('another description');
+        $Location->setDescription('Lorem ipsum loc.');
 
 
         // tells Doctrine you want to (eventually) save the Location (no queries yet)
@@ -38,8 +39,12 @@ class LocationController extends AbstractController
 
         $em->flush();
 
-        return new Response('Saved new location with id ' .$Location->getId());
-
+        return new Response('Saved new location with id ' . $Location->getId());
     }
-
+    #[Route('/standard2', name: 'standard2')]
+    public function showAll()
+    {
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findAll();
+        return $this->render('location/index.html.twig', array("locations" => $locations));
+    }
 }

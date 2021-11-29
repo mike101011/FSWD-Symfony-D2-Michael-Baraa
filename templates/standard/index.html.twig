@@ -19,6 +19,16 @@
 
 	<div class="example-wrapper">
 		<h1 class="text-center">Our Destinations</h1>
+		<ul>
+			{% for location in locations %}
+
+				<li>Location:{{location.lName}}, Price:{{location.price}}, Description
+					{{location.description}}
+				</li>
+			{% endfor %}
+
+		</ul>
+
 
 		This friendly message is coming from:
 		<ul>
